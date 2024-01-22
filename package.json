@@ -4,5 +4,9 @@
   },
   "dependencies": {
     "@faker-js/faker": "^8.0.2"
+  },
+  "scripts": {
+    "cy:run": "npx cypress run --browser chrome",
+    "cy:open": "npx cypress open"
   }
 }

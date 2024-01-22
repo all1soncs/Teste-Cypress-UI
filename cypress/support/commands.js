@@ -23,3 +23,37 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+//Login
+Cypress.Commands.add('login', (usuario, senha) => {
+    cy.get('#username').type(usuario)
+    cy.get('#password').type(senha)
+    cy.get('.woocommerce-form > .button').click()
+})
+
+//Pre-Cadastro
+Cypress.Commands.add('preCadastro', (email, senha, nome, sobrenome) => {
+    cy.get('#reg_email').type(email)
+    cy.get('#reg_password').type(senha)
+    cy.get(':nth-child(4) > .button').click()
+
+    cy.get(':nth-child(3) > [href="http://lojaebac.ebaconline.art.br/minha-conta/edit-account/"]').click()
+    cy.get('#account_first_name').type(nome)
+    cy.get('#account_last_name').type(sobrenome)
+    cy.get('.woocommerce-Button').click()
+})
+
+//Produto
+Cypress.Commands.add('addProdutos', (produto, tamanho, cor, quantidade) => {
+    cy.get('[class="product-block grid"]')
+    cy.get(':nth-child(2) > .page-numbers').click()
+    cy.get('[class="product-block grid"]').contains(produto).click()
+    cy.get('.button-variable-item-' + tamanho).click()
+    cy.get('.button-variable-item-' + cor).click()
+    cy.get('.input-text').clear().type(quantidade)
+    //carrinho
+    cy.get('.single_add_to_cart_button').click()
+
+})
+
+export { };
